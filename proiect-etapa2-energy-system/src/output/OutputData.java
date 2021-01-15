@@ -9,12 +9,13 @@ public final class OutputData {
 
     private final List<ConsumerOutput> consumers;
     private final List<DistributorOutput> distributors;
+    private final List<ProducerOutput> energyProducers;
 
-    public OutputData(final List<ConsumerOutput> consumers,
-                      final List<DistributorOutput> distributors) {
-
+    public OutputData(List<ConsumerOutput> consumers, List<DistributorOutput> distributors,
+                      List<ProducerOutput> energyProducers) {
         this.consumers = consumers;
         this.distributors = distributors;
+        this.energyProducers = energyProducers;
     }
 
     public List<ConsumerOutput> getConsumers() {
@@ -23,5 +24,9 @@ public final class OutputData {
 
     public List<DistributorOutput> getDistributors() {
         return distributors;
+    }
+
+    public List<ProducerOutput> getEnergyProducers() {
+        return energyProducers;
     }
 }

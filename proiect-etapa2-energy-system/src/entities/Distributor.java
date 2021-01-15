@@ -4,6 +4,8 @@ import utils.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.SortedMap;
+
 /**
  Clasa contine campurile si metodele specifice unui distributor
  */
@@ -19,20 +21,27 @@ public final class Distributor extends Entity {
     /**
      Costul de productie platit lunar
      */
+    private final int energyNeededKW;
+
+    private final String producerStrategy;
+
     private int productionCost;
     /**
      Lista de contracte incheiate
      */
     private final List<Contract> contracts = new ArrayList<>();
+    private List<Producer> producers;
 
     public Distributor(final int id, final int contractLength,
                        final int budget, final int infrastructureCost,
-                       final int productionCost) {
+                       final int energyNeededKW, final  String producerStrategy) {
 
         super(id, budget);
         this.contractLength = contractLength;
         this.infrastructureCost = infrastructureCost;
-        this.productionCost = productionCost;
+        this.energyNeededKW = energyNeededKW;
+        this.producerStrategy = producerStrategy;
+
     }
     /**
      * Calculeaza profitul
@@ -68,6 +77,7 @@ public final class Distributor extends Entity {
         } else {
             contractPrice = infrastructureCost + productionCost + getProfit();
         }
+//        System.out.println("COST" + productionCost);
         super.setContractPrice(contractPrice);
     }
     /**
@@ -105,8 +115,39 @@ public final class Distributor extends Entity {
         this.infrastructureCost = infrastructureCost;
     }
 
-    public void setProductionCost(final int productionCost) {
+    public void calculateProductionCost() {
+        double cost = 0;
+//        System.out.println("###### calculateProductionCost" + producers.size());
+
+        for(Producer p : producers) {
+//            System.out.println("energy " + p.getEnergyPerDistributor() + " priceKw " + p.getPriceKW());
+            cost += p.getEnergyPerDistributor() * p.getPriceKW();
+        }
+        int productionCost =  (int) Math.round(Math.floor(cost / 10));
         this.productionCost = productionCost;
     }
 
+    public int getEnergyNeededKW() {
+        return energyNeededKW;
+    }
+
+    public String getProducerStrategy() {
+        return producerStrategy;
+    }
+
+    public void applyStrategy(Strategy strategy) {
+        producers = strategy.apply();
+    }
+
+    public void setProductionCost(int productionCost) {
+        this.productionCost = productionCost;
+    }
+
+    public List<Producer> getProducers() {
+        return producers;
+    }
+
+    public void setProducers(List<Producer> producers) {
+        this.producers = producers;
+    }
 }

@@ -13,7 +13,7 @@ public final class Consumer extends Entity {
     /**
      Valoarea restantei
      */
-    private int debt;
+    private int debt = 0;
     /**
      Daca consumatorul are un furnizor, hasDistributor = true
      */
@@ -57,13 +57,13 @@ public final class Consumer extends Entity {
             // retinem distribuitorul care care este restant
             oldDistributor = currentDistributor;
 
-        // consumatorul nu-si poate plati cheltuielile (are deja restanta de luna anterioara)
-        // si este declarat falimentat
+            // consumatorul nu-si poate plati cheltuielile (are deja restanta de luna anterioara)
+            // si este declarat falimentat
         } else if (finalBudget < 0 && debt > 0) {
             super.setBudget(super.getBudget() + monthlyIncome);
             super.setBankrupt(true);
 
-        // consumatorul isi poate plati cheltuielile
+            // consumatorul isi poate plati cheltuielile
         } else {
             super.setBudget(finalBudget);
             // distribuitorul colecteaza taxele
@@ -113,4 +113,27 @@ public final class Consumer extends Entity {
         this.currentDistributor = currentDistributor;
     }
 
+    public int getDebt() {
+        return debt;
+    }
+
+    public void setDebt(int debt) {
+        this.debt = debt;
+    }
+
+    public boolean isHasDistributor() {
+        return hasDistributor;
+    }
+
+    public Distributor getCurrentDistributor() {
+        return currentDistributor;
+    }
+
+    public Distributor getOldDistributor() {
+        return oldDistributor;
+    }
+
+    public void setOldDistributor(Distributor oldDistributor) {
+        this.oldDistributor = oldDistributor;
+    }
 }
