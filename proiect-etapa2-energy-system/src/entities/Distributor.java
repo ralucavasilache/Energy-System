@@ -2,14 +2,12 @@ package entities;
 
 import utils.Constants;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.SortedMap;
+import java.util.*;
 
 /**
  Clasa contine campurile si metodele specifice unui distributor
  */
-public final class Distributor extends Entity {
+public final class Distributor extends Entity implements Observer{
     /**
      Durata contractului pe care il pune la dispozitie
      */
@@ -31,6 +29,8 @@ public final class Distributor extends Entity {
      */
     private final List<Contract> contracts = new ArrayList<>();
     private List<Producer> producers;
+    private boolean updateNeeded = false;
+
 
     public Distributor(final int id, final int contractLength,
                        final int budget, final int infrastructureCost,
@@ -137,6 +137,11 @@ public final class Distributor extends Entity {
 
     public void applyStrategy(Strategy strategy) {
         producers = strategy.apply();
+        for(Producer p : producers) {
+//            System.out.println("-------- adding distributor " + this.getId() + " to producer " + p.getId());
+//            System.out.println("        -------- producer has now " + p.getCurrentDistributors()  + " and max number of " + p.getMaxDistributors());
+            p.addObserver(this);
+        }
     }
 
     public void setProductionCost(int productionCost) {
@@ -149,5 +154,32 @@ public final class Distributor extends Entity {
 
     public void setProducers(List<Producer> producers) {
         this.producers = producers;
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        updateNeeded = true;
+    }
+
+    public boolean isUpdateNeeded() {
+        return updateNeeded;
+    }
+
+    public void setUpdateNeeded(boolean updateNeeded) {
+        this.updateNeeded = updateNeeded;
+    }
+
+    @Override
+    public String toString() {
+        return "Distributor{" +
+                "contractLength=" + contractLength +
+                ", infrastructureCost=" + infrastructureCost +
+                ", energyNeededKW=" + energyNeededKW +
+                ", producerStrategy='" + producerStrategy + '\'' +
+                ", productionCost=" + productionCost +
+                ", contracts=" + contracts +
+                ", producers=" + producers +
+                ", updateNeeded=" + updateNeeded +
+                '}';
     }
 }

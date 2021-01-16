@@ -59,6 +59,6 @@ public final class Contract {
                 "consumerId=" + consumerId +
                 ", price=" + price +
                 ", remainedContractMonths=" + remainedContractMonths +
-                '}';
+                '}' + "\n";
     }
 }

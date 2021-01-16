@@ -87,11 +87,27 @@ public final class GameSimulator {
         updateContractMonth();
         // se alimina din jos consumatorii si distribuitorii care au dat faliment
         removeConsumers();
+
+
+
         removeDistributors();
         // se trece la urmatoarea luna
 
+        changeProducer();
+
         makeMonthlyStats();
 
+
+        System.out.println("MONTH         :   " + (currentMonth + 1));
+//////        for(Distributor d : distributors) {
+//////            System.out.println("distrib id : " + d.getId() + "   producers : " + d.getProducers());
+//////        }
+//        for(Producer p : producers) {
+//            System.out.println("producer id : " + p.getId() + " update : " + p.getMonthlyStats());
+//        }
+        prinConsumertInfo();
+//        prinDistributorInfo();
+        //prinProducerInfo();
 
         currentMonth++;
     }
@@ -119,32 +135,43 @@ public final class GameSimulator {
         //makeMonthlyStats();
         // se trece la urmatoarea luna
 
-
+        prinConsumertInfo();
+//        prinDistributorInfo();
+        //prinProducerInfo();
 
         currentMonth++;
     }
     private void prinConsumertInfo() {
+        System.out.println("------------------------------------- CONSUMERS ---------------------------------------");
         for(Consumer c : consumers) {
-            System.out.println("currentMonth" + currentMonth + " \nid " + c.getId()
-                    + " budget " + c.getBudget() + " contractPrice "
-                    + c.getContractPrice() + " isBankrupt " + c.isBankrupt() + " debt "
-                    + c.getDebt() + " oldDistributor " + c.getOldDistributor()
-                    + " currentDistributor " + c.getCurrentDistributor().getId());
+            if(c.getOldDistributor() != null)
+            System.out.println("RUNDA : " + currentMonth + " \nid, " + c.getId()
+                    + ", budget " + c.getBudget() + ", contractPrice "
+                    + c.getContractPrice() + ", isBankrupt " + c.isBankrupt() + ", debt "
+                    + c.getDebt() + ", oldDistributor " + c.getOldDistributor().getId()
+                    + ", currentDistributor " + c.getCurrentDistributor().getId());
         }
+        System.out.println();
     }
     private void prinDistributorInfo() {
+        System.out.println("------------------------------------- DISTRIBUTORS ---------------------------------------");
         for(Distributor c : distributors) {
-            System.out.println("currentMonth " + currentMonth + " \nid " + c.getId() + " energyNeededKW "
-                    + c.getEnergyNeededKW() + " contractPrice " + c.getContractPrice()
-                    + " budget " + c.getBudget()  + " producerStrategy " + c.getProducerStrategy() +
-                    " isBankrupt " + c.isBankrupt() + " contracts "  +  c.getContracts());
+            System.out.println("RUNDA : " + currentMonth + " \nid, " + c.getId() + ", energyNeededKW "
+                    + c.getEnergyNeededKW() + ", contractPrice " + c.getContractPrice()
+                    + ", budget " + c.getBudget()  + ", producerStrategy " + c.getProducerStrategy() +
+                    ", isBankrupt " + c.isBankrupt() + ", infrastructureCost " + c.getInfrastructureCost()
+                    + ", productionCost " + c.getProductionCost() +
+                    ", contracts : \n"  +  c.getContracts());
         }
+        System.out.println();
     }
     private void prinProducerInfo() {
+        System.out.println("------------------------------------- PRODUCERS ---------------------------------------");
         for(Producer c : producers) {
-            System.out.println("currentMonth " + currentMonth + " \nid " + c.getId() + " monthlyStats "
+            System.out.println("RUNDA " + currentMonth + " \nid " + c.getId() + " monthlyStats "
                             + c.getMonthlyStats());
         }
+        System.out.println();
     }
     // completeaza statisticile lunare
     private void makeMonthlyStats() {
@@ -152,10 +179,10 @@ public final class GameSimulator {
         for(Producer p : producers) {
             p.addMonthlyState(currentMonth);
         }
-
+//        System.out.println("MONTHLYSTATS");
         for(Distributor d : distributors) {
             for(Producer p : d.getProducers()) {
-//                System.out.println("###### id " + d.getId() + " month " + currentMonth);
+//                System.out.println("###### id distr " + d.getId() + "  id prod " + p.getId() + " month " + (currentMonth+1));
                 p.addId(d.getId(), currentMonth );
             }
         }
@@ -374,10 +401,31 @@ public final class GameSimulator {
                     // care a dat faliment nu va mai avea distribuitor
                     c.resetCurrentDistributor();
                 }
+                for(Producer p : d.getProducers()) {
+                    p.deleteObserver(d);
+                }
             }
         }
     }
+    private void changeProducer() {
+        for(Distributor d : distributors) {
+            if(!d.isBankrupt() && d.isUpdateNeeded()) {
+                for(Producer p : d.getProducers()){
 
+                    p.deleteObserver(d);
+                    p.decCurrentDistrb();
+                }
+
+                switch (d.getProducerStrategy()) {
+                    case "GREEN" -> d.applyStrategy(new GreenStrategy(producers, d.getEnergyNeededKW()));
+                    case "PRICE" -> d.applyStrategy(new PriceStrategy(producers, d.getEnergyNeededKW()));
+                    case "QUANTITY" -> d.applyStrategy(new QuantityStrategy(producers, d.getEnergyNeededKW()));
+                }
+                d.setUpdateNeeded(false);
+            }
+
+        }
+    }
     public List<Consumer> getConsumers() {
         return consumers;
     }

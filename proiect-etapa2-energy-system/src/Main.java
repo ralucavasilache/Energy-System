@@ -95,6 +95,8 @@ public final class Main {
                 distributors,producers ,updates);
 
         gameSimulator.simulateGame();
+//        System.out.println("----------------------------------- PRODUCERS --------------------------------------");
+
 //        for(Producer c : producers) {
 //            System.out.println( " \nid " + c.getId() + " monthlyStats "
 //                    + c.getMonthlyStats());
