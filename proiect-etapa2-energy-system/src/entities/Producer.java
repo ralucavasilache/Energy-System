@@ -3,45 +3,94 @@ package entities;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
-import java.util.Observer;
+/**
+ Clasa care contine campurile si implementarile specifice unui producator
+ */
+public final class Producer extends Observable {
 
-public class Producer extends Observable {
-    private final int id;
+    private int id;
     private EnergyType energyType;
     private final int maxDistributors;
+    /**
+     Numarul de distribuitori abonati
+     */
     private int currentDistributors = 0;
     private final double priceKW;
     private  int energyPerDistributor;
     private List<MonthlyStats> monthlyStats;
-    //private List<Integer> monthlyDistributorIds;
-//    private List<Observer> observers;
 
-    public Producer(int id, String energyType, int maxDistributors, double priceKW, int energyPerDistributor) {
+    public Producer(final int id, final String energyType, final int maxDistributors,
+                    final double priceKW, final int energyPerDistributor) {
+
         this.id = id;
-        switch (energyType) {
-            case "WIND" -> this.energyType = EnergyType.WIND;
-            case "SOLAR" -> this.energyType = EnergyType.SOLAR;
-            case "HYDRO" -> this.energyType = EnergyType.HYDRO;
-            case "COAL" -> this.energyType = EnergyType.COAL;
-            case "NUCLEAR" -> this.energyType = EnergyType.NUCLEAR;
-        }
+        createEnergyType(energyType);
         this.maxDistributors = maxDistributors;
         this.priceKW = priceKW;
         this.energyPerDistributor = energyPerDistributor;
         monthlyStats = new ArrayList<>();
-        //monthlyDistributorIds = new ArrayList<>();
-        //observers = new ArrayList<>();
     }
+    /**
+     * Creeaza un enum
+     * @param type, tipul de energie
+     */
+    private void createEnergyType(String type) {
 
-    public void setEnergyPerDistributor(int energyPerDistributor) {
+        if (type.compareTo("WIND") == 0) {
+            this.energyType = EnergyType.WIND;
+
+        } else if (type.compareTo("SOLAR") == 0) {
+            this.energyType = EnergyType.SOLAR;
+
+        } else if (type.compareTo("HYDRO") == 0) {
+            this.energyType = EnergyType.HYDRO;
+
+        } else if (type.compareTo("COAL") == 0) {
+            this.energyType = EnergyType.COAL;
+
+        } else if (type.compareTo("NUCLEAR") == 0) {
+            this.energyType = EnergyType.NUCLEAR;
+        }
+    }
+    /**
+     * Cand producatorului i se modifica cantitatea de energie pe care
+     * o poate oferi, acesta notifica toti distribuitorii abonati la el
+     * @param energyPerDistributor, noua cantitate de energie
+     */
+    public void setEnergyPerDistributor(final int energyPerDistributor) {
+
         this.energyPerDistributor = energyPerDistributor;
         setChanged();
-//        System.out.println(countObservers());
         notifyObservers();
     }
+    /**
+     * Creeaza si adauga o noua statistica pentru o luna
+     * @param month, luna corespunzatoare
+     */
+    public void addMonthlyState(final int month) {
 
-    public int getId() {
-        return id;
+        MonthlyStats newMonth = new MonthlyStats(month + 1);
+        monthlyStats.add(newMonth);
+    }
+    /**
+     * Adauga id-ul unui distribuitor in statistici
+     * @param distributorId, id-ul distribuitorului
+     * @param month, luna in care distribuitorul este abonat
+     */
+    public void addId(final int distributorId, final int month) {
+
+        monthlyStats.get(month).getDistributorsIds().add(distributorId);
+    }
+    /**
+     * Scade numarul de distribuitori abonati
+     */
+    public void decrementCurrentDistributors() {
+        currentDistributors--;
+    }
+    /**
+     * Creste numarul de distribuitori abonati
+     */
+    public void addDistributor() {
+        this.currentDistributors++;
     }
 
     public EnergyType getEnergyType() {
@@ -63,61 +112,24 @@ public class Producer extends Observable {
     public int getCurrentDistributors() {
         return currentDistributors;
     }
-    public void addDistributor() {
-        this.currentDistributors++;
-    }
-    public void addId(int id, int month) {
-//        System.out.println("month   " + month);
-        monthlyStats.get(month).getDistributorsIds().add(id);
-    }
-    public void addMonthlyState(int month) {
-        MonthlyStats newMonth = new MonthlyStats(month+1);
-        monthlyStats.add(newMonth);
-    }
 
-    public void setEnergyType(EnergyType energyType) {
+    public void setEnergyType(final EnergyType energyType) {
         this.energyType = energyType;
-    }
-
-    public void setCurrentDistributors(int currentDistributors) {
-        this.currentDistributors = currentDistributors;
     }
 
     public List<MonthlyStats> getMonthlyStats() {
         return monthlyStats;
     }
 
-    public void setMonthlyStats(List<MonthlyStats> monthlyStats) {
+    public void setMonthlyStats(final List<MonthlyStats> monthlyStats) {
         this.monthlyStats = monthlyStats;
     }
 
-//    public List<Integer> getMonthlyDistributorIds() {
-//        return monthlyDistributorIds;
-//    }
-
-//    public void setMonthlyDistributorIds(List<Integer> monthlyDistributorIds) {
-//        this.monthlyDistributorIds = monthlyDistributorIds;
-//    }
-
-    @Override
-    public synchronized void deleteObservers() {
-        super.deleteObservers();
+    public int getId() {
+        return id;
     }
 
-    @Override
-    public synchronized void addObserver(Observer o) {
-        super.addObserver(o);
-//        System.out.println(observers);
+    public void setId(int id) {
+        this.id = id;
     }
-
-    @Override
-    public String toString() {
-        return "Producer{" +
-                "id=" + id +
-                '}';
-    }
-    public void decCurrentDistrb() {
-        currentDistributors--;
-    }
-
 }

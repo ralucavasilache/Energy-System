@@ -2,12 +2,16 @@ package entities;
 
 import java.util.ArrayList;
 import java.util.List;
+/**
+ Clasa care contine campurile specifice unei statistici lunare
+ */
+public final class MonthlyStats {
 
-public class MonthlyStats {
     private int month;
     private List<Integer> distributorsIds;
 
-    public MonthlyStats(int month) {
+    public MonthlyStats(final int month) {
+
         this.month = month;
         this.distributorsIds = new ArrayList<>();
     }
@@ -27,15 +31,5 @@ public class MonthlyStats {
     public void setDistributorsIds(List<Integer> distributorsIds) {
         this.distributorsIds = distributorsIds;
     }
-    public void addId(final int id) {
-        distributorsIds.add(id);
-    }
 
-    @Override
-    public String toString() {
-        return "MonthlyStats{" +
-                "month=" + month +
-                ", distributorsIds=" + distributorsIds +
-                '}' + "\n";
-    }
 }

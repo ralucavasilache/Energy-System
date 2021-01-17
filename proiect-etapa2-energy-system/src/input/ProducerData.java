@@ -1,6 +1,9 @@
 package input;
-
-public class ProducerData {
+/**
+ * Clasa care contine datele despre un producator,
+ * parsate din format JSON
+ */
+public final class ProducerData {
     private final int id;
     private final String energyType;
     private final int maxDistributors;
@@ -35,14 +38,4 @@ public class ProducerData {
         return energyPerDistributor;
     }
 
-    @Override
-    public String toString() {
-        return "ProducerData{" +
-                "id=" + id +
-                ", energyType='" + energyType + '\'' +
-                ", maxDistributors=" + maxDistributors +
-                ", priceKW=" + priceKW +
-                ", energyPerDistributor=" + energyPerDistributor +
-                '}' + "\n";
-    }
 }

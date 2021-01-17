@@ -36,7 +36,8 @@ public final class EntityFactory {
             return new Distributor(distributor.getId(), distributor.getContractLength(),
                                     distributor.getInitialBudget(),
                                     distributor.getInitialInfrastructureCost(),
-                                    distributor.getEnergyNeededKW(), distributor.getProducerStrategy());
+                                    distributor.getEnergyNeededKW(),
+                                    distributor.getProducerStrategy());
         } else if (type.equals(Constants.CONSUMER)) {
 
             ConsumerData consumer = ((ConsumerData) entity);

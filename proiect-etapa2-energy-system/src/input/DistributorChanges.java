@@ -1,6 +1,10 @@
 package input;
+/**
+ * Clasa care contine schimbarile pentru un distribuitor,
+ * parsate din format JSON
+ */
+public final class DistributorChanges {
 
-public class DistributorChanges {
     private final int id;
     private final int infrastructureCost;
 
@@ -17,11 +21,4 @@ public class DistributorChanges {
         return infrastructureCost;
     }
 
-    @Override
-    public String toString() {
-        return "DistributorChanges{" +
-                "id=" + id +
-                ", infrastructureCost=" + infrastructureCost +
-                '}' + "\n";
-    }
 }

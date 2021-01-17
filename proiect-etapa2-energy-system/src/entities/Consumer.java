@@ -112,28 +112,4 @@ public final class Consumer extends Entity {
     public void setCurrentDistributor(final Distributor currentDistributor) {
         this.currentDistributor = currentDistributor;
     }
-
-    public int getDebt() {
-        return debt;
-    }
-
-    public void setDebt(int debt) {
-        this.debt = debt;
-    }
-
-    public boolean isHasDistributor() {
-        return hasDistributor;
-    }
-
-    public Distributor getCurrentDistributor() {
-        return currentDistributor;
-    }
-
-    public Distributor getOldDistributor() {
-        return oldDistributor;
-    }
-
-    public void setOldDistributor(Distributor oldDistributor) {
-        this.oldDistributor = oldDistributor;
-    }
 }

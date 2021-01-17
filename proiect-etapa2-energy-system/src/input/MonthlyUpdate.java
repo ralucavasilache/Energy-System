@@ -30,13 +30,4 @@ public final class MonthlyUpdate {
     public List<ProducerChanges> getProducerChanges() {
         return producerChanges;
     }
-
-    @Override
-    public String toString() {
-        return "MonthlyUpdate{" +
-                "newConsumers=" + newConsumers +
-                ", distributorChanges=" + distributorChanges +
-                ", producerChanges=" + producerChanges +
-                '}' + "\n";
-    }
 }

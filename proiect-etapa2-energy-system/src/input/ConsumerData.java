@@ -28,12 +28,4 @@ public final class ConsumerData {
         return monthlyIncome;
     }
 
-    @Override
-    public String toString() {
-        return "ConsumerData{" +
-                "id=" + id +
-                ", initialBudget=" + initialBudget +
-                ", monthlyIncome=" + monthlyIncome +
-                '}' + "\n";
-    }
 }

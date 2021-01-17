@@ -1,6 +1,10 @@
 package input;
+/**
+ * Clasa care contine schimbarile pentru un producator,
+ * parsate din format JSON
+ */
+public final class ProducerChanges {
 
-public class ProducerChanges {
     private final int id;
     private final int energyPerDistributor;
 
@@ -17,11 +21,4 @@ public class ProducerChanges {
         return energyPerDistributor;
     }
 
-    @Override
-    public String toString() {
-        return "ProducerChanges{" +
-                "id=" + id +
-                ", energyPerDistributor=" + energyPerDistributor +
-                '}' + "\n";
-    }
 }

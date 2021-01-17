@@ -4,17 +4,11 @@ package entities;
  * Consumator si Distribuitor
  */
 public abstract class Entity {
-    /**
-     Id-ul entitatii
-     */
+
     private int id;
-    /**
-     Bugetul entitatii
-     */
+
     private int budget;
-    /**
-     Pretul contractului
-     */
+
     private int contractPrice;
     /**
      Daca a dat faliment campul isBankrupt = true

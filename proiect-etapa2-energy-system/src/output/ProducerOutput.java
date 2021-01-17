@@ -1,11 +1,9 @@
 package output;
 
-import entities.EnergyType;
-import entities.MonthlyStats;
-
 import java.util.List;
 
-public class ProducerOutput {
+public final class ProducerOutput {
+
     private final int id;
     private final int maxDistributors;
     private final double priceKW;
@@ -13,8 +11,11 @@ public class ProducerOutput {
     private final int energyPerDistributor;
     private List<MonthlyStatsOutput> monthlyStats;
 
-    public ProducerOutput(int id, int maxDistributors, double priceKW, String energyType,
-                          int energyPerDistributor, List<MonthlyStatsOutput> monthlyStats) {
+    public ProducerOutput(final int id, final int maxDistributors,
+                          final double priceKW, final String energyType,
+                          final int energyPerDistributor,
+                          final List<MonthlyStatsOutput> monthlyStats) {
+
         this.id = id;
         this.maxDistributors = maxDistributors;
         this.priceKW = priceKW;

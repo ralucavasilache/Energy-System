@@ -29,13 +29,4 @@ public final class InputData {
     public List<MonthlyUpdate> getMonthlyUpdates() {
         return monthlyUpdates;
     }
-
-    @Override
-    public String toString() {
-        return "InputData{" +
-                "numberOfTurns=" + numberOfTurns +
-                ", initialData=" + initialData +
-                ", monthlyUpdates=" + monthlyUpdates +
-                '}' + "\n";
-    }
 }

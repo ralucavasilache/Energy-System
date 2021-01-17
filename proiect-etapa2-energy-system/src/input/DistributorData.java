@@ -45,16 +45,4 @@ public final class DistributorData {
     public String getProducerStrategy() {
         return producerStrategy;
     }
-
-    @Override
-    public String toString() {
-        return "DistributorData{" +
-                "id=" + id +
-                ", contractLength=" + contractLength +
-                ", initialBudget=" + initialBudget +
-                ", initialInfrastructureCost=" + initialInfrastructureCost +
-                ", energyNeededKW=" + energyNeededKW +
-                ", producerStrategy='" + producerStrategy + '\'' +
-                '}' + "\n";
-    }
 }

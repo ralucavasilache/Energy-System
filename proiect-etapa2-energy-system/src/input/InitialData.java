@@ -30,13 +30,4 @@ public final class InitialData {
     public List<ProducerData> getProducers() {
         return producers;
     }
-
-    @Override
-    public String toString() {
-        return "InitialData{" +
-                "consumers=" + consumers +
-                ", distributors=" + distributors +
-                ", producers=" + producers +
-                '}' + "\n";
-    }
 }

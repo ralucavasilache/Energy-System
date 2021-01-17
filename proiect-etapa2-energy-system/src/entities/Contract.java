@@ -3,17 +3,9 @@ package entities;
  Clasa contine campurile si metodele specifice unui contract
  */
 public final class Contract {
-    /**
-     Id-ul consumatorului
-     */
+
     private int consumerId;
-    /**
-     Pretul contractului
-     */
     private int price;
-    /**
-     Lunile ramase din contract
-     */
     private int remainedContractMonths;
 
     public Contract(final int consumerId, final int price, final int remainedContractMonths) {
@@ -21,6 +13,12 @@ public final class Contract {
         this.consumerId = consumerId;
         this.price = price;
         this.remainedContractMonths = remainedContractMonths;
+    }
+    /**
+     * Decrementeaza numarul de luni din contract ramase
+     */
+    public void decrementRemainedContractMonths() {
+        remainedContractMonths--;
     }
 
     public int getConsumerId() {
@@ -45,20 +43,5 @@ public final class Contract {
 
     public void setRemainedContractMonths(final int remainedContractMonths) {
         this.remainedContractMonths = remainedContractMonths;
-    }
-    /**
-     * Decrementeaza numarul de luni din contract ramase
-     */
-    public void decrementRemainedContractMonths() {
-        remainedContractMonths--;
-    }
-
-    @Override
-    public String toString() {
-        return "Contract{" +
-                "consumerId=" + consumerId +
-                ", price=" + price +
-                ", remainedContractMonths=" + remainedContractMonths +
-                '}' + "\n";
     }
 }
