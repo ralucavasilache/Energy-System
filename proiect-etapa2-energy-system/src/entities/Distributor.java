@@ -12,37 +12,14 @@ import java.util.Observer;
  Clasa contine campurile si metodele specifice unui distributor
  */
 public final class Distributor extends Entity implements Observer {
-    /**
-     Durata contractului pe care il pune la dispozitie
-     */
+
     private final int contractLength;
-    /**
-     Costul de infrastructura platit lunar
-     */
     private int infrastructureCost;
-    /**
-     Energia de care are nevoie lunar
-     */
     private final int energyNeededKW;
-    /**
-     Strategia pe care o aplica
-     */
     private final String producerStrategy;
-    /**
-     Costul de productie platit lunar
-     */
     private int productionCost;
-    /**
-     Lista de contracte incheiate
-     */
     private final List<Contract> contracts = new ArrayList<>();
-    /**
-     Lista de producatori la care e abonat
-     */
     private List<Producer> producers;
-    /**
-     Flag care este true daca trebuie sa se realeaga producatori
-     */
     private boolean updateNeeded = false;
 
 

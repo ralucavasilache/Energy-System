@@ -11,9 +11,6 @@ public final class Producer extends Observable {
     private int id;
     private EnergyType energyType;
     private final int maxDistributors;
-    /**
-     Numarul de distribuitori abonati
-     */
     private int currentDistributors = 0;
     private final double priceKW;
     private  int energyPerDistributor;

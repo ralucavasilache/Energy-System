@@ -18,30 +18,12 @@ import java.util.List;
  * Clasa care simuleaza mecanismul jocului
  */
 public final class GameSimulator {
-    /**
-     * Luna/runda curenta
-     * Este -1 daca este prima luna
-     */
+
     private int currentMonth = -1;
-    /**
-     * Numarul de runde
-     */
     private final int numberOfTurns;
-    /**
-     * Lista cu consumatorii din joc
-     */
     private final List<Consumer> consumers;
-    /**
-     * Lista cu distribuitorii din joc
-     */
     private final List<Distributor> distributors;
-    /**
-     * Lista cu producatorii din joc
-     */
     private final List<Producer> producers;
-    /**
-     * Lista cu update-urile lunare
-     */
     private final List<MonthlyUpdate> monthlyUpdates;
 
     public GameSimulator(final int numberOfTurns,
@@ -241,13 +223,10 @@ public final class GameSimulator {
      * Se fac update-urile
      */
     private void update() {
-        // daca nu este prima runda a jocului
-        if (currentMonth != -1) {
-            // se actualizeaza valorile pentru distribuitori
-            applyDistributorChanges();
-            // se adauga consumatori noi
-            addNewConsumer();
-        }
+        // se actualizeaza valorile pentru distribuitori
+        applyDistributorChanges();
+        // se adauga consumatori noi
+        addNewConsumer();
     }
     /**
      * Se adauga consumatori noi (cititi din monthlyUpdates)
@@ -273,12 +252,10 @@ public final class GameSimulator {
      * Se fac update-uri pentru producatori
      */
     private void applyProducerChanges() {
-        if (currentMonth != -1) {
-            for (ProducerChanges p : monthlyUpdates.get(currentMonth).getProducerChanges()) {
-                Producer producer = getProducer(p.getId());
-                assert producer != null;
-                producer.setEnergyPerDistributor(p.getEnergyPerDistributor());
-            }
+        for (ProducerChanges p : monthlyUpdates.get(currentMonth).getProducerChanges()) {
+            Producer producer = getProducer(p.getId());
+            assert producer != null;
+            producer.setEnergyPerDistributor(p.getEnergyPerDistributor());
         }
     }
     /**

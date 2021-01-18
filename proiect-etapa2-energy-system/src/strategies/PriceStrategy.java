@@ -10,13 +10,8 @@ import java.util.stream.Collectors;
  Clasa care contine implementarile specifice pentru strategia PRICE
  */
 public final class PriceStrategy implements Strategy {
-    /**
-     Toti producatorii din baza de date
-     */
+
     private  List<Producer> producers;
-    /**
-     Cantitatea de energie necesara
-     */
     private final int energyNeededKW;
 
     public PriceStrategy(final List<Producer> producers, final int energyNeededKW) {

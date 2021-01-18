@@ -6,13 +6,8 @@ package entities;
 public abstract class Entity {
 
     private int id;
-
     private int budget;
-
     private int contractPrice;
-    /**
-     Daca a dat faliment campul isBankrupt = true
-     */
     private boolean isBankrupt = false;
 
     public Entity(final int id, final int budget) {

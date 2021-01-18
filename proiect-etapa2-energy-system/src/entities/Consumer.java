@@ -6,25 +6,11 @@ import utils.Constants;
  Clasa contine campurile si metodele specifice unui consumator
  */
 public final class Consumer extends Entity {
-    /**
-     Venitul lunar
-     */
+
     private int monthlyIncome;
-    /**
-     Valoarea restantei
-     */
     private int debt = 0;
-    /**
-     Daca consumatorul are un furnizor, hasDistributor = true
-     */
     private boolean hasDistributor = false;
-    /**
-     Distribuitorul curent
-     */
     private Distributor currentDistributor;
-    /**
-     Distribuitorul catre care are restanta
-     */
     private Distributor oldDistributor;
 
     public Consumer(final int id, final int budget, final int monthlyIncome) {

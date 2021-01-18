@@ -10,13 +10,8 @@ import java.util.stream.Collectors;
  Clasa care contine implementarile specifice pentru strategia QUANTITY
  */
 public final class QuantityStrategy implements Strategy {
-    /**
-     Toti producatorii din baza de date
-     */
+
     private  List<Producer> producers;
-    /**
-     Cantitatea de energie necesara
-     */
     private final int energyNeededKW;
 
     public QuantityStrategy(final List<Producer> producers, final int energyNeededKW) {

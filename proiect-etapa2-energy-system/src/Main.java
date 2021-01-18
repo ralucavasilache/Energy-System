@@ -26,7 +26,7 @@ public final class Main {
      Punctul de plecare al implementarii temei
      */
     public static void main(final String[] args) throws Exception {
-//
+
         // Fisier de intrare
         String inFile = args[0];
         // Fisier de iesire
