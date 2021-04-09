@@ -1,5 +1,0 @@
-Starting audit...
-[ERROR] C:\Users\user\Desktop\proiect part2 OOP\proiect-oop---etapa-2\proiect-etapa2-energy-system\.\src\Main.java:62: Line is longer than 100 characters (found 110). [LineLength]
-[ERROR] C:\Users\user\Desktop\proiect part2 OOP\proiect-oop---etapa-2\proiect-etapa2-energy-system\.\src\simulation\GameSimulator.java:189: Line is longer than 100 characters (found 103). [LineLength]
-Audit done.
-Checkstyle ends with 2 errors.
